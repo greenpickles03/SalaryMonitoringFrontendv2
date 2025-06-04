@@ -10,7 +10,7 @@ import { AuthStatusService } from './authstatus.service';
   providedIn: 'root',
 })
 export class AuthService {
-  private loginUrl = `${SERVER_URL}/api/v1/auth/login`; // Login endpoint
+  private loginUrl = `${SERVER_URL}/api/v1/user-account/getUserAccount`; // Login endpoint
 
   constructor(private http: HttpClient, private authStatusService: AuthStatusService) {}
 

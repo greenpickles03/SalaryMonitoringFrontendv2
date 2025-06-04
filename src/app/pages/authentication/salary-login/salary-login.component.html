@@ -30,12 +30,12 @@
                 class="w-100"
                 color="primary"
               >
-                <input matInput formControlName="uname" />
-                @if(f['uname'].touched && f['uname'].invalid) {
+                <input matInput formControlName="username" />
+                @if(f['username'].touched && f['username'].invalid) {
                 <mat-hint class="m-b-16 error-msg">
-                  @if(f['uname'].errors && f['uname'].errors['required']) {
+                  @if(f['username'].errors && f['username'].errors['required']) {
                   <div class="text-error">Username is required.</div>
-                  } @if(f['uname'].errors && f['uname'].errors['minlength']) {
+                  } @if(f['username'].errors && f['username'].errors['minlength']) {
                   <div class="text-error">Username should be 6 character.</div>
                   }
                 </mat-hint>
@@ -71,17 +71,16 @@
               >
                 Sign In
               </button>
-              <button
+              <!-- <button
                 mat-flat-button
                 color="primary"
                 class="w-100"
                 >
                 Register Account
-                </button>
+                </button> -->
               <!-- input -->
               2025 — Copyright Ⓒ Maybank Phil, Inc
             </form>
-
           </div>
         </div>
       </div>

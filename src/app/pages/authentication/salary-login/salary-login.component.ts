@@ -44,7 +44,7 @@ export class AppSalaryLoginComponent implements OnInit {
 
   // Form Group for login
   form = new FormGroup({
-    uname: new FormControl('', [Validators.required, Validators.minLength(6)]),
+    username: new FormControl('', [Validators.required, Validators.minLength(3)]),
     password: new FormControl('', [Validators.required]),
   });
 
@@ -59,7 +59,7 @@ export class AppSalaryLoginComponent implements OnInit {
       return; // Stop execution if the form is invalid
     }
 
-    const userName = this.form.value.uname!; // Non-null assertion
+    const userName = this.form.value.username!; // Non-null assertion
     const password = this.form.value.password!; // Non-null assertion
 
     this.authStatusService.stopAuthCheck(); // Stop auth check before login
