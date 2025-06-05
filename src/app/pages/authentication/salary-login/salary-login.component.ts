@@ -59,31 +59,36 @@ export class AppSalaryLoginComponent implements OnInit {
       return; // Stop execution if the form is invalid
     }
 
-    const userName = this.form.value.username!; // Non-null assertion
+    const username = this.form.value.username!; // Non-null assertion
     const password = this.form.value.password!; // Non-null assertion
 
-    this.authStatusService.stopAuthCheck(); // Stop auth check before login
+   
 
-    this.authService.login(userName, password).subscribe({
+    this.authService.login(username, password).subscribe({
       next: (response) => {
+         console.log('Submitting login form with username:', username, 'and password:', password)
         console.log('Login response:', response);
-        console.log('token:', response.token);
+        console.log('userDetails:', response.userDetails);
         // Handle successful login (e.g., navigate to another page)
-        localStorage.setItem('token', response.token);
-        localStorage.setItem('UserID', response.userID);
-        localStorage.setItem('name', response.name);
-        localStorage.setItem('department', response.department);
-        console.log('Done Setting Local Storage');
-        console.log('Navigating to /starter');
-        this.router.navigate(['/dashboard']).then(success => {
-          if (success) {
-            console.log('Navigation to /starter successful');
-          } else {
-            console.log('Navigation to /starter failed');
-          }
-        }).catch(error => {
-          console.error('Navigation error:', error);
-        });
+        // localStorage.setItem('token', response.token);
+        // localStorage.setItem('UserID', response.userID);
+        localStorage.setItem('name', response.userDetails.firstName);
+        localStorage.setItem('email', response.userDetails.email);
+        if(response.status == "OK"  ){
+          this.router.navigate(['/dashboard']).then(success => {
+            if (success) {
+              console.log('Navigation to /starter successful');
+            } else {
+              console.log('Navigation to /starter failed');
+            }
+          }).catch(error => {
+            console.error('Navigation error:', error);
+          });   
+        }else{
+          console.error('Login failed:', response.message);
+          // Handle login failure (e.g., display an error message)
+        }
+        
       },
       error: (error) => {
         console.error('Login error:', error);

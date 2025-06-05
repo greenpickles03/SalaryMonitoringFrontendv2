@@ -17,13 +17,19 @@ export class AuthService {
   // Login method
   
   // Login method
-  login(userName: string, password: string): Observable<any> {
-    const body = { userName, password }; // Request body
+  login(username: string, password: string): Observable<any> {
+    const body = 
+      {
+        username: username, // Username from the form
+        password: password, // Password from the form
+        // Additional parameters can be added here if needed
+      } // Request body
 
     return this.http.post<any>(this.loginUrl, body).pipe(
       map((response) => {
         // Handle successful login
-        console.log('Login Successful');
+        // console.log('Login response:', response);
+        // console.log('Login Successful');
         //this.authStatusService.startAuthCheck(); // Start auth check
         return response;
       }),

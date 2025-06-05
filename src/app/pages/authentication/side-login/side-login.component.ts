@@ -62,28 +62,28 @@ export class AppSideLoginComponent implements OnInit {
     const userName = this.form.value.uname!; // Non-null assertion
     const password = this.form.value.password!; // Non-null assertion
 
-    this.authStatusService.stopAuthCheck(); // Stop auth check before login
+    // this.authStatusService.stopAuthCheck(); 
 
     this.authService.login(userName, password).subscribe({
       next: (response) => {
+        console.log('Login response:', response);
         console.log('Login response:', response);
         console.log('token:', response.token);
         // Handle successful login (e.g., navigate to another page)
         localStorage.setItem('token', response.token);
         localStorage.setItem('UserID', response.userID);
         localStorage.setItem('name', response.name);
-        localStorage.setItem('department', response.department);
         console.log('Done Setting Local Storage');
         console.log('Navigating to /chatbot');
-        this.router.navigate(['/chatbot']).then(success => {
-          if (success) {
-            console.log('Navigation to /chatbot successful');
-          } else {
-            console.log('Navigation to /chatbot failed');
-          }
-        }).catch(error => {
-          console.error('Navigation error:', error);
-        });
+        // this.router.navigate(['/chatbot']).then(success => {
+        //   if (success) {
+        //     console.log('Navigation to /chatbot successful');
+        //   } else {
+        //     console.log('Navigation to /chatbot failed');
+        //   }
+        // }).catch(error => {
+        //   console.error('Navigation error:', error);
+        // });
       },
       error: (error) => {
         console.error('Login error:', error);

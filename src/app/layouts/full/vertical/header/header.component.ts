@@ -106,7 +106,7 @@ export class HeaderComponent {
   
   options = this.settings.getOptions();
   userName = localStorage.getItem('name') || '';
-  department = localStorage.getItem('department') || '';
+  department = localStorage.getItem('email') || '';
   setDark() {
     this.settings.toggleTheme();
   }
