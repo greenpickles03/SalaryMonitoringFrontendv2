@@ -180,6 +180,11 @@ export class AppHorizontalHeaderComponent {
       title: 'Sign Out',
       link: '/authentication/login',
     },
+    {
+      id: 6,
+      title: 'Balance',
+      link: '/',
+    },
   ];
 
   apps: apps[] = [
