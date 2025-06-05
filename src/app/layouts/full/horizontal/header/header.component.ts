@@ -48,7 +48,8 @@ export class AppHorizontalHeaderComponent {
   @Output() toggleCollapsed = new EventEmitter<void>();
 
   userName = localStorage.getItem('name') || '';
-  department = localStorage.getItem('department') || '';
+  email = localStorage.getItem('email') || '';
+  balance = localStorage.getItem('balance') || '0.00';
   showFiller = false;
 
   public selectedLanguage: any = {

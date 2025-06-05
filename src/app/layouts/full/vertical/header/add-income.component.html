@@ -1,0 +1,26 @@
+<div class="d-flex align-items-center gap-4">
+    <h2 mat-dialog-title>Add Balance</h2>
+</div>
+<mat-dialog-content>
+    <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Amount</mat-label>
+        <input matInput />
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Source of Income</mat-label>
+        <mat-select>
+            <mat-option value="salary">Salary</mat-option>
+            <mat-option value="business">Business</mat-option>
+            <mat-option value="investment">Investment</mat-option>
+            <mat-option value="gift">Gift</mat-option>
+            <mat-option value="other">Other</mat-option>
+        </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Description</mat-label>
+        <textarea matInput rows="2"></textarea>
+    </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close>Close</button>
+</mat-dialog-actions>

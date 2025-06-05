@@ -106,7 +106,8 @@ export class HeaderComponent {
   
   options = this.settings.getOptions();
   userName = localStorage.getItem('name') || '';
-  department = localStorage.getItem('email') || '';
+  email = localStorage.getItem('email') || '';
+  balance = localStorage.getItem('balance') || '0.00';
   setDark() {
     this.settings.toggleTheme();
   }
@@ -117,6 +118,10 @@ export class HeaderComponent {
     dialogRef.afterClosed().subscribe((result) => {
       console.log(`Dialog result: ${result}`);
     });
+  }
+
+  openBalanceDialog() {
+    const dialogRef = this.dialog.open(AppIncomeDialogComponent);
   }
 
   changeLanguage(lang: any): void {
@@ -189,11 +194,17 @@ export class HeaderComponent {
     //   title: ' Account Settings',
     //   link: '/',
     // },
+     {
+      id: 6,
+      title: 'Balance',
+      link: '/',
+    },
     {
       id: 5,
       title: 'Sign Out',
       link: '/authentication/login',
     },
+   
   ];
 
   apps: apps[] = [
@@ -271,6 +282,24 @@ export class HeaderComponent {
   templateUrl: 'search-dialog.component.html',
 })
 export class AppSearchDialogComponent {
+  searchText: string = '';
+  navItems = navItems;
+
+  navItemsData = navItems.filter((navitem) => navitem.displayName);
+
+  // filtered = this.navItemsData.find((obj) => {
+  //   return obj.displayName == this.searchinput;
+  // });
+}
+
+@Component({
+  selector:'income-dialog',
+  standalone: true,
+  imports: [RouterModule, MaterialModule, TablerIconsModule, FormsModule],
+  templateUrl: 'add-income.component.html',
+})
+
+export class AppIncomeDialogComponent {
   searchText: string = '';
   navItems = navItems;
 
