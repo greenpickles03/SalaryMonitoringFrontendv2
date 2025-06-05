@@ -74,12 +74,12 @@ export class AppSalaryLoginComponent implements OnInit {
         localStorage.setItem('name', response.name);
         localStorage.setItem('department', response.department);
         console.log('Done Setting Local Storage');
-        console.log('Navigating to /chatbot');
-        this.router.navigate(['/chatbot']).then(success => {
+        console.log('Navigating to /starter');
+        this.router.navigate(['/dashboard']).then(success => {
           if (success) {
-            console.log('Navigation to /chatbot successful');
+            console.log('Navigation to /starter successful');
           } else {
-            console.log('Navigation to /chatbot failed');
+            console.log('Navigation to /starter failed');
           }
         }).catch(error => {
           console.error('Navigation error:', error);

@@ -9,11 +9,22 @@ export const navItems: NavItem[] = [
   //   iconName: 'solar:home-smile-line-duotone',
   //   route: '/starter',
   // },
+   {
+    displayName: 'Dashboard',
+    iconName: 'solar:home-smile-line-duotone', 
+    route: '/dashboard',
+  },
+   {
+    displayName: 'Starter',
+    iconName: 'solar:align-horizontal-center-line-duotone', 
+    route: '/starter',
+  },
   {
     displayName: 'Chatbot',
     iconName: 'tabler:message-chatbot',
     route: '/chatbot',
   },
+ 
 
 //   {
 //     divider: true,
