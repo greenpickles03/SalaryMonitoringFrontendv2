@@ -75,6 +75,7 @@ export class AppSalaryLoginComponent implements OnInit {
         localStorage.setItem('name', response.userDetails.firstName);
         localStorage.setItem('email', response.userDetails.email);
         localStorage.setItem('balance', response.userDetails.incomeAmount);
+        localStorage.setItem('userID', response.userDetails.userAccountId);
         if(response.status == "OK"  ){
           this.router.navigate(['/dashboard']).then(success => {
             if (success) {

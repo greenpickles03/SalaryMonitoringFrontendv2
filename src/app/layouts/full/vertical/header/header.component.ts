@@ -4,6 +4,7 @@ import {
   EventEmitter,
   Input,
   ViewEncapsulation,
+  ViewChild, ElementRef,
 } from '@angular/core';
 import { CoreService } from 'src/app/services/core.service';
 import { MatDialog } from '@angular/material/dialog';
@@ -13,8 +14,9 @@ import { TablerIconsModule } from 'angular-tabler-icons';
 import { MaterialModule } from 'src/app/material.module';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule,FormGroup } from '@angular/forms';
 import { NgScrollbarModule } from 'ngx-scrollbar';
+import { MatSelectChange } from '@angular/material/select';
 
 interface notifications {
   id: number;
@@ -128,6 +130,8 @@ export class HeaderComponent {
     this.translate.use(lang.code);
     this.selectedLanguage = lang;
   }
+
+  
 
   notifications: notifications[] = [
     {
@@ -293,19 +297,46 @@ export class AppSearchDialogComponent {
 }
 
 @Component({
-  selector:'income-dialog',
+  selector: 'income-dialog',
   standalone: true,
   imports: [RouterModule, MaterialModule, TablerIconsModule, FormsModule],
   templateUrl: 'add-income.component.html',
 })
-
 export class AppIncomeDialogComponent {
-  searchText: string = '';
-  navItems = navItems;
+  sourceOfIncome: string = '';
+  amount: number | null = 0;
+  description: string | null = null;
+
+  incomeSources = [
+    { value: 'salary', label: 'Salary' },
+    { value: 'business', label: 'Business' },
+    { value: 'investment', label: 'Investment' },
+    { value: 'gift', label: 'Gift' },
+    { value: 'other', label: 'Other' }
+  ];
+
+  @ViewChild('amountInput') amountInput!: ElementRef;
+  @ViewChild('descriptionInput') descriptionInput!: ElementRef;
+
+  onSelectionChange(event: MatSelectChange) {
+    this.sourceOfIncome = event.value;
+    console.log('Selected Source of Income:', this.sourceOfIncome);
+  }
+  today: Date = new Date();
+  formattedDate: string = new Intl.DateTimeFormat('en-CA').format(this.today);
+
+
+  onSubmit() {
+    const userID = localStorage.getItem('userID') || '';
+    const amountValue = parseFloat(this.amount !== null ? this.amount.toString() : '0');
+    const inputValue = parseFloat(localStorage.getItem('balance') || '0');
+    console.log('Amount:', (amountValue + inputValue).toFixed(2));
+    console.log('Source of Income:', this.sourceOfIncome);
+    console.log('Description:', this.description);
+    console.log('Amount Input Element:', this.formattedDate); 
+    console.log('Description Input Element:', userID); // Assuming you want to log the email
+  }
 
   navItemsData = navItems.filter((navitem) => navitem.displayName);
-
-  // filtered = this.navItemsData.find((obj) => {
-  //   return obj.displayName == this.searchinput;
-  // });
+  // filtered = this.navItemsData.find((obj) => obj.displayName === this.searchText);
 }

@@ -1,26 +1,34 @@
 <div class="d-flex align-items-center gap-4">
     <h2 mat-dialog-title>Add Balance</h2>
 </div>
+
 <mat-dialog-content>
+    
     <mat-form-field appearance="outline" class="w-100">
         <mat-label>Amount</mat-label>
-        <input matInput />
+        <input matInput [(ngModel)]="amount" #amountInput />
     </mat-form-field>
-    <mat-form-field appearance="outline" class="w-100">
+
+   <mat-form-field appearance="outline" class="w-100">
         <mat-label>Source of Income</mat-label>
-        <mat-select>
-            <mat-option value="salary">Salary</mat-option>
-            <mat-option value="business">Business</mat-option>
-            <mat-option value="investment">Investment</mat-option>
-            <mat-option value="gift">Gift</mat-option>
+        <mat-select (selectionChange)="onSelectionChange($event)">
+            @for (item of incomeSources; track item.value) {
+                <mat-option [value]="item.value">
+                    {{ item.label }}
+                </mat-option>
+            }
             <mat-option value="other">Other</mat-option>
         </mat-select>
     </mat-form-field>
+
+
     <mat-form-field appearance="outline" class="w-100">
         <mat-label>Description</mat-label>
-        <textarea matInput rows="2"></textarea>
+        <textarea matInput rows="2" [(ngModel)]="description" #descriptionInput></textarea>
     </mat-form-field>
 </mat-dialog-content>
-<mat-dialog-actions>
-  <button mat-button mat-dialog-close>Close</button>
+
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Close</button>
+    <button mat-flat-button color="primary" (click)="onSubmit()">Submit</button>
 </mat-dialog-actions>
