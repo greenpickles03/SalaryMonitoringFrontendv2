@@ -17,6 +17,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule,FormGroup } from '@angular/forms';
 import { NgScrollbarModule } from 'ngx-scrollbar';
 import { MatSelectChange } from '@angular/material/select';
+import {IncomeService} from 'src/app/services/income.service';
 
 interface notifications {
   id: number;
@@ -304,8 +305,9 @@ export class AppSearchDialogComponent {
 })
 export class AppIncomeDialogComponent {
   sourceOfIncome: string = '';
-  amount: number | null = 0;
+  amount: number;
   description: string | null = null;
+  constructor(private incomeService: IncomeService) {}
 
   incomeSources = [
     { value: 'salary', label: 'Salary' },
@@ -335,6 +337,13 @@ export class AppIncomeDialogComponent {
     console.log('Description:', this.description);
     console.log('Amount Input Element:', this.formattedDate); 
     console.log('Description Input Element:', userID); // Assuming you want to log the email
+
+    this.incomeService.addIncome(userID,this.description,
+      this.sourceOfIncome,(amountValue + inputValue).toFixed(2),this.formattedDate).subscribe({
+      next: (response) => {
+          console.log('Income added successfully:', response);
+      }
+    })
   }
 
   navItemsData = navItems.filter((navitem) => navitem.displayName);
