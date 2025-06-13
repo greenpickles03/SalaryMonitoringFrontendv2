@@ -57,6 +57,7 @@ export class DashboardComponent implements OnInit  {
                 console.log('Response received:', response);
                 localStorage.setItem('name', response.name);
                 localStorage.setItem('department', response.department);
+                localStorage.setItem('balance', response.userDetails.incomeAmount);
             },
             error: (error) => {
                 console.error('Error fetching account:', error);
