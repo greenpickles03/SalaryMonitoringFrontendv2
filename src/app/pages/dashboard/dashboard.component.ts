@@ -5,6 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TablerIconsModule } from 'angular-tabler-icons';
 import { NgScrollbarModule } from 'ngx-scrollbar';
 import { Nl2BrPipe } from 'src/app/services/nl2br.pipe';
+import { AuthService } from 'src/app/services/auth.service';
 
 export interface PeriodicElement {
   name: string;
@@ -40,11 +41,29 @@ const ELEMENT_DATA: PeriodicElement[] = [
 export class DashboardComponent implements OnInit  {
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
   dataSource = ELEMENT_DATA;
+  constructor(private authStatusService: AuthService) {
+
+  }
 
     sidePanelOpened = true; 
     
     ngOnInit(): void {
-        throw new Error('Method not implemented.');
+        // throw new Error('Method not implemented.');
+        console.log('ngOnInit called');
+        console.log('startAuthCheck called: ' + localStorage.getItem('email'));
+      setInterval(() => {
+        this.authStatusService.findAccountByEmail(localStorage.getItem('email')).subscribe({
+            next: (response) => {
+                console.log('Response received:', response);
+                localStorage.setItem('name', response.name);
+                localStorage.setItem('department', response.department);
+            },
+            error: (error) => {
+                console.error('Error fetching account:', error);
+            }
+        })
+      }, 5000);
+        
     }
     isOver(): boolean {
         return window.matchMedia(`(max-width: 960px)`).matches;

@@ -11,8 +11,23 @@ import { AuthStatusService } from './authstatus.service';
 })
 export class AuthService {
   private loginUrl = `${SERVER_URL}/api/v1/user-account/getUserAccount`; // Login endpoint
+  private findByEmail = `${SERVER_URL}/api/v1/user-account/accountDetailsByEmail`; // Find by email endpoint
 
   constructor(private http: HttpClient, private authStatusService: AuthStatusService) {}
+
+  findAccountByEmail(email:any){
+    const body = {
+      email: email, // Email to search for
+      // Additional parameters can be added here if needed
+    }
+    return this.http.post<any>(this.findByEmail, body).pipe(
+      map((response) => {
+        // Handle successful account retrieval
+        // console.log('Account retrieval response:', response);
+        return response;
+      })
+    )
+  }
 
   // Login method
   
