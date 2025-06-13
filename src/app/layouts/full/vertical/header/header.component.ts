@@ -307,6 +307,7 @@ export class AppIncomeDialogComponent {
   sourceOfIncome: string = '';
   amount: number;
   description: string | null = null;
+  dialog: MatDialog;
   constructor(private incomeService: IncomeService) {}
 
   incomeSources = [
@@ -327,7 +328,6 @@ export class AppIncomeDialogComponent {
   today: Date = new Date();
   formattedDate: string = new Intl.DateTimeFormat('en-CA').format(this.today);
 
-
   onSubmit() {
     const userID = localStorage.getItem('userID') || '';
     const amountValue = parseFloat(this.amount !== null ? this.amount.toString() : '0');
@@ -342,10 +342,42 @@ export class AppIncomeDialogComponent {
       this.sourceOfIncome,(amountValue + inputValue).toFixed(2),this.formattedDate).subscribe({
       next: (response) => {
           console.log('Income added successfully:', response);
+          if (response.success) {
+            // Update local storage with the new balance
+            localStorage.setItem('balance', (amountValue + inputValue).toFixed(2));
+            // Reset form fields
+            this.amount = 0;
+            this.sourceOfIncome = '';
+            this.description = null;
+            // Reset input fields
+            if (this.amountInput) {
+              this.amountInput.nativeElement.value = '';
+            }
+            if (this.descriptionInput) {
+              this.descriptionInput.nativeElement.value = '';
+            }
+            setTimeout(() => {
+              this.sourceOfIncome = ''; // Ensures reactivity
+            });
+
+            this.dialog.closeAll(); // Close the dialog after successful submission
+          }
       }
     })
   }
-
+  ngOnInit() {
+    const inputValue = parseFloat(localStorage.getItem('balance') || '0');
+    // Initialize the navItemsData with filtered items that have displayName  
+    console.log('ngOnInit called');
+    // this.navItemsData = this.navItems.filter((navitem) => navitem.displayName);
+    setInterval(() => {
+      console.log('Repeating every 5 seconds');
+      localStorage.setItem('balance', (13 + inputValue).toFixed(2));
+      console.log('Updated balance:', localStorage.getItem('balance'));
+    }, 5000);
+  }
   navItemsData = navItems.filter((navitem) => navitem.displayName);
   // filtered = this.navItemsData.find((obj) => obj.displayName === this.searchText);
+
+  
 }
