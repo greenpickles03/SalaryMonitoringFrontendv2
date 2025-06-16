@@ -359,11 +359,11 @@ export class AppIncomeDialogComponent {
             setTimeout(() => {
               this.sourceOfIncome = ''; // Ensures reactivity
             });
-
-            this.dialog.closeAll(); // Close the dialog after successful submission
+          
           }
       }
     })
+    this.dialog.closeAll(); // Close the dialog after successful submission
   }
   ngOnInit() {
     const inputValue = parseFloat(localStorage.getItem('balance') || '0');
