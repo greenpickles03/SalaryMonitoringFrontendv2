@@ -24,6 +24,11 @@ export const navItems: NavItem[] = [
     iconName: 'tabler:message-chatbot',
     route: '/chatbot',
   },
+  {
+    displayName: 'Chatbotv2',
+    iconName: 'tabler:message-chatbot',
+    route: '/chatbotv2',
+  },
  
 
 //   {

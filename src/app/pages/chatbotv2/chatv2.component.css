@@ -1,0 +1,51 @@
+.chat-container {
+  max-width: 600px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+
+.messages {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+mat-card {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  margin: 8px;
+  border-radius: 15px;
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.2);
+}
+
+mat-card.user {
+  background-color: rgba(0, 123, 255, 0.8);
+  color: white;
+  text-align: right;
+}
+
+mat-card.ai {
+  background-color: rgba(255, 255, 255, 0.9);
+  color: black;
+  border-left: 5px solid #007bff;
+  display: flex;
+  align-items: center;
+}
+
+.avatar {
+  font-size: 24px;
+  margin-right: 10px;
+}
+
+.input-box {
+  display: flex;
+  align-items: center;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background: white;
+  padding: 10px;
+}

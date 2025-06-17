@@ -1,0 +1,16 @@
+<div class="chat-container">
+  <div class="messages">
+    <mat-card *ngFor="let msg of messages" [ngClass]="msg.sender">
+      <div class="avatar" *ngIf="msg.sender === 'ai'">🤖</div>
+      <div class="message-text">{{ msg.text }}</div>
+    </mat-card>
+  </div>
+  <div class="input-box">
+    <mat-form-field>
+      <input matInput [(ngModel)]="userMessage" placeholder="Ask me anything..." (keyup.enter)="sendMessage()" />
+    </mat-form-field>
+    <button mat-icon-button color="primary" (click)="sendMessage()">➤</button>
+    <button mat-icon-button (click)="startListening()">🎤</button>
+    <button mat-icon-button (click)="toggleDarkMode()">🌙</button>
+  </div>
+</div>
