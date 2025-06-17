@@ -4,7 +4,7 @@ import { FullComponent } from './layouts/full/full.component';
 import { ChatbotComponent } from './pages/chatbot/chat.component';
 import { AuthGuard } from 'src/app/services/authguard.service';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
-import { Chatv2Component } from './pages/chatbotv2/chatv2.component';
+// import { Chatv2Component } from './pages/chatbotv2/chatv2.component';
 
 export const routes: Routes = [
   {
@@ -32,12 +32,12 @@ export const routes: Routes = [
         component: DashboardComponent,
         title: "Dashboard",
       }
-      ,
-      {
-        path: 'chatbotv2',
-        component: Chatv2Component,
-        title: "Helpdesk Chatbotv2",
-      }
+      // ,
+      // {
+      //   path: 'chatbotv2',
+      //   component: Chatv2Component,
+      //   title: "Helpdesk Chatbotv2",
+      // }
     ],
   },
   {
